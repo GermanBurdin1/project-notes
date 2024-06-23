@@ -28,7 +28,7 @@ class User
 	/**
 	 * @var Collection<int, Note>
 	 */
-	#[ORM\OneToMany(targetEntity: Note::class, mappedBy: 'owner1', orphanRemoval: true)]
+	#[ORM\OneToMany(targetEntity: Note::class, mappedBy: 'owner', orphanRemoval: true)]
 	private Collection $createdPosts;
 
 	public function __construct()
