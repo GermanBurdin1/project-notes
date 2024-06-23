@@ -8,88 +8,89 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: NoteRepository::class)]
 class Note
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+	#[ORM\Id]
+	#[ORM\GeneratedValue]
+	#[ORM\Column]
+	private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
+	#[ORM\Column(length: 255)]
+	private ?string $title = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
+	#[ORM\Column(length: 255)]
+	private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $owner = null;
+	#[ORM\Column]
+	private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $createdAt = null;
+	#[ORM\Column]
+	private ?\DateTime $updatedAt = null;
 
-    #[ORM\Column]
-    private ?\DateTime $updatedAt = null;
+	#[ORM\ManyToOne(inversedBy: 'createdPosts')]
+	#[ORM\JoinColumn(nullable: false)]
+	private ?User $owner = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
+	public function getTitle(): ?string
+	{
+		return $this->title;
+	}
 
-    public function setTitle(string $title): static
-    {
-        $this->title = $title;
+	public function setTitle(string $title): static
+	{
+		$this->title = $title;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
+	public function getDescription(): ?string
+	{
+		return $this->description;
+	}
 
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
+	public function setDescription(string $description): static
+	{
+		$this->description = $description;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getOwner(): ?string
-    {
-        return $this->owner;
-    }
+	public function getCreatedAt(): ?\DateTimeImmutable
+	{
+		return $this->createdAt;
+	}
 
-    public function setOwner(string $owner): static
-    {
-        $this->owner = $owner;
+	public function setCreatedAt(?\DateTimeImmutable $createdAt): static
+	{
+		$this->createdAt = $createdAt;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
+	public function getUpdatedAt(): ?\DateTime
+	{
+		return $this->updatedAt;
+	}
 
-    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
+	public function setUpdatedAt(\DateTime $updatedAt): static
+	{
+		$this->updatedAt = $updatedAt;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
+	public function getOwner(): ?User
+	{
+		return $this->owner;
+	}
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
+	public function setOwner(?User $owner): static
+	{
+		$this->owner = $owner;
 
-        return $this;
-    }
+		return $this;
+	}
 }
